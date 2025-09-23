@@ -2,20 +2,20 @@ import User from '../model/user.js';
 import BaseGNLBackendService from './base_service.js';
 
 class UserService extends BaseGNLBackendService {
-    async getUserByDiscord(discordName) {
-        if (!discordName) {
-            console.error(`Discord name not defined: ${discordName}`);
-            throw new Error(`Discord name not defined: ${discordName}`);
+    async getUserByDiscord(discordId) {
+        if (!discordId) {
+            console.error(`Discord Id not defined: ${discordId}`);
+            throw new Error(`Discord Id not defined: ${discordId}`);
         }
-        console.debug(`Searching for user by Discord name: ${discordName}`);
-        const users = await this.searchUsers(`discordTag==${discordName}`);
+        console.debug(`Searching for user by Discord id: ${discordId}`);
+        const users = await this.searchUsers(`discordId==${discordId}`);
         if (!users || users.length === 0) {
-            console.debug(`No user found with Discord name: ${discordName}`);
+            console.debug(`No user found with Discord id: ${discordId}`);
             return null;
         }
         if (users.length > 1) {
-            console.error(`More than one user found with Discord name: ${discordName}`);
-            throw new Error(`More than one user found by Discord name: ${discordName}`);
+            console.error(`More than one user found with Discord id: ${discordId}`);
+            throw new Error(`More than one user found by Discord id: ${discordId}`);
         }
         const user = users[0];
         console.debug(`Found user:`, user);
