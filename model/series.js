@@ -13,10 +13,10 @@ class Series {
         this.player1 = data.player1 ? new User(data.player1) : null;
         this.player2_id = data.player2_id || null;
         this.player2 = data.player2 ? new User(data.player2) : null;
-        this.player1_score = data.player1_score || null;
-        this.player2_score = data.player2_score || null;
-        this.player1_points = data.player1_points || null;
-        this.player2_points = data.player2_points || null;
+        this.player1_score = data.player1_score ?? null;
+        this.player2_score = data.player2_score ?? null;
+        this.player1_points = data.player1_points ?? null;
+        this.player2_points = data.player2_points ?? null;
         this.host_player_id = data.host_player_id || null;
         this.is_fantasy_match = data.is_fantasy_match || false;
     }
