@@ -43,8 +43,9 @@ class SeriesService extends BaseGNLBackendService {
     }
 
     async getAllSeries() {
+        // there is no plain GET /series route, so match every row via search
         console.debug(`Fetching all series`);
-        const seriesList = await this.get(`series`);
+        const seriesList = await this.search(`series/search`, `id > 0`);
         console.debug(`Received response:`, seriesList);
         return seriesList.map(seriesData => new Series(seriesData));
     }

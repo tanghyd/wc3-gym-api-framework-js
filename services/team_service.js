@@ -69,7 +69,7 @@ class TeamService extends BaseGNLBackendService {
 
     async getTeamForSeason(seasonId, teamId) {
         console.debug(`Fetching team with ID: ${teamId} for season ID: ${seasonId}`);
-        const result = await this.get(`teams/${teamId}/season/${seasonId}`);
+        const result = await this.get(`teams/${teamId}/seasons/${seasonId}`);
         console.debug(`Received response:`, result);
         return new Team(result);
     }
