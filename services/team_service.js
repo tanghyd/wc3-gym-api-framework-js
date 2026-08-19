@@ -53,9 +53,9 @@ class TeamService extends BaseGNLBackendService {
         return teams.map(teamData => new Team(teamData));
     }
 
-    async getAllTeams() {
+    async getAllTeams(options = {}) {
         console.debug(`Fetching all teams`);
-        const teams = await this.get(`teams`);
+        const teams = await this.get(`teams`, this.buildPagingParams(options));
         console.debug(`Received response:`, teams);
         return teams.map(teamData => new Team(teamData));
     }

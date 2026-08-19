@@ -5,8 +5,8 @@ class ConfigService extends BaseGNLBackendService {
    * Get all configuration settings
    * @returns {Promise<Array>} Array of setting objects with key, value, and description
    */
-  async getAllSettings() {
-    const response = await this.get("/config/settings");
+  async getAllSettings(options = {}) {
+    const response = await this.get("/config/settings", this.buildPagingParams(options));
     return response.settings || [];
   }
 
