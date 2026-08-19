@@ -53,9 +53,9 @@ class FantasyBetService extends BaseGNLBackendService {
         return bets.map(bet => new FantasyBet(bet));
     }
 
-    async getAllBets() {
+    async getAllBets(options = {}) {
         console.debug(`Fetching all fantasy bets`);
-        const bets = await this.get(`fantasy/bets`);
+        const bets = await this.get(`fantasy/bets`, this.buildPagingParams(options));
         console.debug(`Received response:`, bets);
         return bets.map(bet => new FantasyBet(bet));
     }

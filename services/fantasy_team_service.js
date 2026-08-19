@@ -53,9 +53,9 @@ class FantasyTeamService extends BaseGNLBackendService {
         return teams.map(team => new FantasyTeam(team));
     }
 
-    async getAllTeams() {
+    async getAllTeams(options = {}) {
         console.debug(`Fetching all fantasy teams`);
-        const teams = await this.get(`fantasy/teams`);
+        const teams = await this.get(`fantasy/teams`, this.buildPagingParams(options));
         console.debug(`Received response:`, teams);
         return teams.map(team => new FantasyTeam(team));
     }

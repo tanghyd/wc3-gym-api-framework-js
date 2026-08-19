@@ -53,9 +53,9 @@ class MapService extends BaseGNLBackendService {
         return true;
     }
 
-    async getAllMaps() {
+    async getAllMaps(options = {}) {
         console.debug(`Fetching all maps`);
-        const maps = await this.get(`maps`);
+        const maps = await this.get(`maps`, this.buildPagingParams(options));
         console.debug(`Received response:`, maps);
         return maps.map(mapData => new Map(mapData));
     }

@@ -73,9 +73,9 @@ class UserService extends BaseGNLBackendService {
         return true;
     }
 
-    async getAllUsers() {
+    async getAllUsers(options = {}) {
         console.debug(`Fetching all users`);
-        const users = await this.get(`users`);
+        const users = await this.get(`users`, this.buildPagingParams(options));
         console.debug(`Received response:`, users);
         return users.map(userData => new User(userData));
     }

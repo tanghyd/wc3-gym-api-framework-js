@@ -88,13 +88,25 @@ class BaseGNLBackendService {
     return this.sendRequest(BaseGNLBackendService.HTTPMethods.POST, endpoint, data, { Authorization: `Bearer ${this.token}` });
   }
 
-  async search(endpoint, search_str = null) {
+  async search(endpoint, search_str = null, options = {}) {
     await this.ensureValidToken();
     let query = null;
     if (search_str) {
       query = {'query':search_str};
     }
+    const paging = this.buildPagingParams(options);
+    if (paging) {
+      query = { ...(query || {}), ...paging };
+    }
     return this.sendRequest(BaseGNLBackendService.HTTPMethods.POST, endpoint, null, { Authorization: `Bearer ${this.token}`}, query);
+  }
+
+  // builds a {limit, offset} params object, or null if neither is set
+  buildPagingParams({ limit, offset } = {}) {
+    const params = {};
+    if (limit !== undefined) params.limit = limit;
+    if (offset !== undefined) params.offset = offset;
+    return Object.keys(params).length ? params : null;
   }
 
   async put(endpoint, data = {}) {

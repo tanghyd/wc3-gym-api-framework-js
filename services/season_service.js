@@ -42,9 +42,9 @@ class SeasonService extends BaseGNLBackendService {
         return true;
     }
 
-    async getAllSeasons() {
+    async getAllSeasons(options = {}) {
         console.debug(`Fetching all seasons`);
-        const seasons = await this.get(`seasons`);
+        const seasons = await this.get(`seasons`, this.buildPagingParams(options));
         console.debug(`Received response:`, seasons);
         return seasons.map(seasonData => new Season(seasonData));
     }
